@@ -1,0 +1,16 @@
+{
+    "start_node": "start",
+    "nodes": [
+        {
+            "id": "start",
+            "text": "War is on the horizon...",
+            "speaker": "Narrator",
+            "choices": [
+                {
+                    "text": "To be continued.",
+                    "next_id": null
+                }
+            ]
+        }
+    ]
+}

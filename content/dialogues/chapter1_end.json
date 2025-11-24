@@ -1,0 +1,16 @@
+{
+    "start_node": "start",
+    "nodes": [
+        {
+            "id": "start",
+            "text": "The day ends. You look at the reports.",
+            "speaker": "Narrator",
+            "choices": [
+                {
+                    "text": "Go to sleep.",
+                    "next_id": null
+                }
+            ]
+        }
+    ]
+}

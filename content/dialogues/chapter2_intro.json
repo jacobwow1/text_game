@@ -1,0 +1,27 @@
+{
+    "start_node": "start",
+    "nodes": [
+        {
+            "id": "start",
+            "text": "A month has passed. The economy has stabilized thanks to your austerity measures.",
+            "speaker": "Narrator",
+            "choices": [
+                {
+                    "text": "It was a hard choice, but necessary.",
+                    "next_id": "reflection"
+                }
+            ]
+        },
+        {
+            "id": "reflection",
+            "text": "Now, a new problem arises. The neighboring country is mobilizing troops.",
+            "speaker": "Narrator",
+            "choices": [
+                {
+                    "text": "Call the General.",
+                    "next_id": null
+                }
+            ]
+        }
+    ]
+}

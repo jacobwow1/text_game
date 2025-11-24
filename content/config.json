@@ -1,0 +1,25 @@
+{
+    "stats": {
+        "Logic": 1,
+        "Empathy": 1,
+        "Authority": 1,
+        "Rhetoric": 1,
+        "Public Approval": 50,
+        "Wealth Approval": 50,
+        "Military Loyalty": 50
+    },
+    "stat_categories": {
+        "Personality": [
+            "Logic",
+            "Empathy",
+            "Authority",
+            "Rhetoric"
+        ],
+        "Politics": [
+            "Public Approval",
+            "Wealth Approval",
+            "Military Loyalty"
+        ]
+    },
+    "starting_points": 8
+}

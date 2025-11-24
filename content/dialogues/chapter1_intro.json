@@ -1,0 +1,27 @@
+{
+    "start_node": "start",
+    "nodes": [
+        {
+            "id": "start",
+            "text": "The phone rings. It's the President. 'We have a situation.'",
+            "speaker": "Narrator",
+            "choices": [
+                {
+                    "text": "Pick up the phone.",
+                    "next_id": "pickup"
+                }
+            ]
+        },
+        {
+            "id": "pickup",
+            "text": "'The economy is crashing. Fix it.' Click.",
+            "speaker": "President",
+            "choices": [
+                {
+                    "text": "I'd better get to work.",
+                    "next_id": null
+                }
+            ]
+        }
+    ]
+}

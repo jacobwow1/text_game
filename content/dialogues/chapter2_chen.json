@@ -1,0 +1,32 @@
+{
+    "start_node": "greeting",
+    "nodes": [
+        {
+            "id": "greeting",
+            "text": "Leader, the General is waiting. But first, about the budget surplus...",
+            "speaker": "Advisor Chen",
+            "choices": [
+                {
+                    "text": "Not now, Chen.",
+                    "next_id": "dismiss"
+                },
+                {
+                    "text": "Good work on the economy.",
+                    "next_id": "praise"
+                }
+            ]
+        },
+        {
+            "id": "dismiss",
+            "text": "Understood. I will prepare the war funds.",
+            "speaker": "Advisor Chen",
+            "choices": []
+        },
+        {
+            "id": "praise",
+            "text": "Thank you. It was your leadership that saved us.",
+            "speaker": "Advisor Chen",
+            "choices": []
+        }
+    ]
+}
