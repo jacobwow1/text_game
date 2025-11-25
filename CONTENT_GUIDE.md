@@ -27,7 +27,6 @@ Edit `content/characters.json` to add new people to the office Hub.
     {
         "name": "Advisor Name",
         "role": "Job Title",
-        "role": "Job Title",
         "generic_dialogue": "generic_fallback.json"
     }
 ]
@@ -58,9 +57,11 @@ Create new `.json` files in `content/chapters/` (e.g., `chapter_1.json`, `chapte
     "requirements": {
         "flags": {"previous_choice_made": true}
     },
+    "time_limit": 3,
     "failure_message": "You failed because..."
 }
 ```
+- `time_limit`: (Optional) Integer. If the time counter reaches this value, the chapter ends automatically (triggering `end_dialogue`). 0=Morning, 1=Afternoon, 2=Evening, 3=Night.
 - `available_characters`: Can be a simple string (filename) or a list of objects.
     - If a list, the game checks them in order. The first one that meets its `requirements` (and hasn't been completed yet) is chosen.
     - If no dialogue is found, the character's `generic_dialogue` is used.
@@ -94,10 +95,11 @@ Modify player stats or flags when a choice is made.
     "end_chapter": true
 }
 ```
-- `end_chapter`: If set to `true`, the chapter will end (triggering the Outro dialogue) as soon as this conversation finishes. Use this for major story decisions that advance time.
-- `effects`: (Optional) Changes to make when chosen.
-    - `stats`: `{"Authority": 1}`
-    - `flags`: `{"angered_advisor": true}`
+- `effects`: (Optional) Changes to game state.
+    - `flags`: Set flags (e.g., `"met_advisor": true`).
+    - `stats`: Modify stats (e.g., `"Influence": 1`).
+    - `increment_time`: (Optional) Boolean. If true, advances time by 1 slot.
+    - `end_chapter`: (Optional) Boolean. If true, ends the chapter immediately. Use this for major story decisions that advance time.
 
 ### Example
 ```json

@@ -5,6 +5,8 @@ from .dialogue import DialogueManager
 from .ui import GameUI
 
 class Game:
+    TIME_SLOTS = ["Morning", "Afternoon", "Evening", "Night"]
+
     def __init__(self):
         self.load_config()
         self.player = Player(self.config["stats"])
@@ -16,7 +18,7 @@ class Game:
         
         self.state = {
             "day": 1,
-            "time": "Morning",
+            "time": 0, # 0=Morning, 1=Afternoon, etc.
             "location": "Office",
             "mode": "START_SCREEN", # Initial mode
             "player": self.player,
@@ -102,6 +104,52 @@ class Game:
             # After this dialogue ends, we should go to HUB
             self.state["next_mode_after_dialogue"] = "HUB"
             
+        elif self.state["mode"] == "CHAPTER_OUTRO":
+            # Load end dialogue and prepare to advance
+            chapter = self.state["chapter"]
+            self.dialogue_manager.load_dialogue(chapter["end_dialogue"], self.player)
+            self.state["mode"] = "DIALOGUE"
+            self.state["history"] = []
+            self.last_node_id = None
+            self.state["next_mode_after_dialogue"] = "CHAPTER_ADVANCE"
+            
+            # Pre-process first node so it appears in render immediately (Fixes blank frame)
+            node = self.dialogue_manager.get_current_node()
+            if node:
+                speaker = node.get("speaker", "Unknown")
+                self.state["history"].append((speaker, node["text"]))
+                self.last_node_id = node["id"]
+                self.state["choices"] = self.dialogue_manager.get_valid_choices(self.player)
+                
+                # Fix soft-lock: If no choices, add a "Leave" option
+                if not self.state["choices"]:
+                    self.state["choices"].append({
+                        "text": "[End Conversation]",
+                        "action": "leave"
+                    })
+
+        elif self.state["mode"] == "CHAPTER_ADVANCE":
+            # Advance chapter
+            self.current_chapter_idx += 1
+            if self.current_chapter_idx < len(self.chapters):
+                # Check requirements for next chapter
+                next_chapter = self.chapters[self.current_chapter_idx]
+                if self.check_chapter_requirements(next_chapter):
+                    self.state["chapter"] = next_chapter
+                    self.state["mode"] = "CHAPTER_SPLASH"
+                    # Reset time for new chapter
+                    self.state["time"] = 0
+                else:
+                    self.state["game_over_message"] = f"You did not meet the requirements to proceed.\nFailed Requirement: {next_chapter.get('failure_message', 'Unknown cause')}"
+                    self.state["mode"] = "GAME_OVER"
+            else:
+                # Game Over / Win
+                self.state["game_over_message"] = "Congratulations! You have completed the available content."
+                self.state["mode"] = "GAME_OVER"
+
+        elif self.state["mode"] == "GAME_OVER":
+            pass # Waiting for input
+
         elif self.state["mode"] == "HUB":
             self.update_hub_options()
         elif self.state["mode"] == "DIALOGUE":
@@ -225,6 +273,10 @@ class Game:
             self.state["mode"] = "CHAPTER_START"
             return
 
+        if self.state["mode"] == "GAME_OVER":
+            self.running = False
+            return
+
         try:
             choice_idx = int(user_input) - 1
         except ValueError:
@@ -241,13 +293,27 @@ class Game:
                     self.state["current_dialogue_file"] = option["target"]
                     self.state["next_mode_after_dialogue"] = "HUB"
                 elif option["action"] == "end_day":
-                    # Go to chapter end
+                    # Go to chapter end dialogue manually
                     chapter = self.chapters[self.current_chapter_idx]
                     self.dialogue_manager.load_dialogue(chapter["end_dialogue"], self.player)
                     self.state["mode"] = "DIALOGUE"
                     self.state["history"] = []
                     self.last_node_id = None
-                    self.state["next_mode_after_dialogue"] = "CHAPTER_END"
+                    self.state["next_mode_after_dialogue"] = "CHAPTER_ADVANCE"
+                    
+                    # Pre-process first node so it appears in render immediately
+                    node = self.dialogue_manager.get_current_node()
+                    if node:
+                        speaker = node.get("speaker", "Unknown")
+                        self.state["history"].append((speaker, node["text"]))
+                        self.last_node_id = node["id"]
+                        self.state["choices"] = self.dialogue_manager.get_valid_choices(self.player)
+                        if not self.state["choices"]:
+                            self.state["choices"].append({
+                                "text": "[End Conversation]",
+                                "action": "leave"
+                            })
+
                 elif option["action"] == "quit":
                     self.running = False
         
@@ -266,8 +332,17 @@ class Game:
 
                 # Check for special effects
                 effects = choice.get("effects", {})
+                
+                if effects.get("increment_time"):
+                    self.state["time"] += 1
+                    # Check for chapter time limit
+                    chapter = self.state["chapter"]
+                    time_limit = chapter.get("time_limit", 999)
+                    if self.state["time"] >= time_limit:
+                        self.state["next_mode_after_dialogue"] = "CHAPTER_OUTRO"
+
                 if effects.get("end_chapter"):
-                    self.state["next_mode_after_dialogue"] = "CHAPTER_END"
+                    self.state["next_mode_after_dialogue"] = "CHAPTER_OUTRO"
 
                 if self.dialogue_manager.make_choice(choice_idx, self.player):
                     # Check if dialogue ended (no next node)
@@ -281,26 +356,7 @@ class Game:
             del self.state["current_dialogue_file"]
 
         next_mode = self.state.get("next_mode_after_dialogue", "HUB")
-        
-        if next_mode == "CHAPTER_END":
-            # Advance chapter
-            self.current_chapter_idx += 1
-            if self.current_chapter_idx < len(self.chapters):
-                # Check requirements for next chapter
-                next_chapter = self.chapters[self.current_chapter_idx]
-                if self.check_chapter_requirements(next_chapter):
-                    self.state["chapter"] = next_chapter
-                    self.state["mode"] = "CHAPTER_SPLASH"
-                else:
-                    print("\n[GAME OVER] You did not meet the requirements to proceed.")
-                    print(f"Failed Requirement: {next_chapter.get('failure_message', 'Unknown cause')}")
-                    self.running = False
-            else:
-                # Game Over / Win
-                print("Game Over - Thanks for playing!")
-                self.running = False
-        else:
-            self.state["mode"] = next_mode
+        self.state["mode"] = next_mode
 
     def check_chapter_requirements(self, chapter):
         reqs = chapter.get("requirements", {})

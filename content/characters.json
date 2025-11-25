@@ -1,7 +1,7 @@
 [
     {
-        "name": "Advisor Chen",
-        "role": "Minister of Finance",
+        "name": "Lucius",
+        "role": "Minister of the Treasury",
         "generic_dialogue": "common/chen_generic.json"
     }
 ]

@@ -19,7 +19,7 @@ class GameUI:
             notif_text = " | ".join([f"[bold yellow]{n}[/]" for n in notifications])
             
         if game_state['mode'] == 'START_SCREEN':
-            self.console.print(Panel("[bold green]Welcome to the Text RPG Framework[/]\n\nPress Enter to Start", title="Welcome"))
+            self.console.print(Panel("[bold green]Consul of Concordia[/]\n\nPress Enter to Start", title="Welcome"))
             return
 
         if game_state['mode'] == 'STAT_ALLOCATION':
@@ -49,7 +49,9 @@ class GameUI:
             return
 
         # Header (Only show for in-game states)
-        header_text = f"Day: {game_state['day']} | Time: {game_state['time']} | Location: {game_state['location']}"
+        from .core import Game
+        time_str = Game.TIME_SLOTS[game_state['time']] if 0 <= game_state['time'] < len(Game.TIME_SLOTS) else "Late Night"
+        header_text = f"Day: {game_state['day']} | Time: {time_str} | Location: {game_state['location']}"
         if notif_text:
             header_text += f"\n\nUpdates: {notif_text}"
             
@@ -57,6 +59,11 @@ class GameUI:
 
         if game_state['mode'] == 'STATS_SCREEN':
             self.render_stats_screen(game_state)
+            return
+
+        if game_state['mode'] == 'GAME_OVER':
+            message = game_state.get('game_over_message', 'Game Over')
+            self.console.print(Panel(f"[bold red]{message}[/]\n\nPress Enter to Quit", title="Game Over"))
             return
 
         # Main Content (Dialogue or Hub)

@@ -1,5 +1,0 @@
-1. Split chapters into their own files in a folder called chapters.
-
-2. Implement a feature where a chapter can end by time passing. I should be able to put a time constraint property in a chapter, and then at certain dialogue points, I should be able to increment the time (which would effect the time in the heading).
-
-3. Since the game is choice based, the chapters should be branching based on the flags and stats a player has. Chapter 2 could look different for one player compared to another.
