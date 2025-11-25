@@ -2,6 +2,6 @@
     {
         "name": "Advisor Chen",
         "role": "Minister of Finance",
-        "generic_dialogue": "chen_generic.json"
+        "generic_dialogue": "common/chen_generic.json"
     }
 ]

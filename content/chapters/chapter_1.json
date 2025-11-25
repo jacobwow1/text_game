@@ -1,0 +1,21 @@
+{
+    "id": 1,
+    "title": "The First Crisis",
+    "intro_dialogue": "chapter_1/chapter1_intro.json",
+    "end_dialogue": "chapter_1/chapter1_end.json",
+    "available_characters": {
+        "Advisor Chen": [
+            {
+                "file": "chapter_1/chen_secret.json",
+                "requirements": {
+                    "flags": {
+                        "found_secret": true
+                    }
+                }
+            },
+            {
+                "file": "chapter_1/chen_default.json"
+            }
+        ]
+    }
+}

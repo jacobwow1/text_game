@@ -43,10 +43,18 @@ class Game:
         return []
 
     def load_chapters_data(self):
-        if os.path.exists("content/chapters.json"):
-            with open("content/chapters.json", "r") as f:
-                return json.load(f)
-        return []
+        chapters = []
+        chapters_dir = "content/chapters"
+        if os.path.exists(chapters_dir):
+            for filename in os.listdir(chapters_dir):
+                if filename.endswith(".json"):
+                    path = os.path.join(chapters_dir, filename)
+                    with open(path, "r") as f:
+                        chapters.append(json.load(f))
+        
+        # Sort by ID to ensure correct order
+        chapters.sort(key=lambda x: x.get("id", 0))
+        return chapters
 
     def run(self):
         while self.running:

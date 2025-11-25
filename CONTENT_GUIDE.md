@@ -36,31 +36,30 @@ Edit `content/characters.json` to add new people to the office Hub.
 *Note: All specific dialogues must be defined in `chapters.json`.*
 
 ## 3. Defining Chapters
-Edit `content/chapters.json` to create the story flow.
+Create new `.json` files in `content/chapters/` (e.g., `chapter_1.json`, `chapter_2.json`). The game loads them and sorts them by `id`.
+
 ```json
-[
-    {
-        "id": 1,
-        "title": "Chapter Title",
-        "intro_dialogue": "intro.json",
-        "end_dialogue": "outro.json",
-        "available_characters": {
-            "Advisor Name": [
-                {
-                    "file": "secret_dialogue.json",
-                    "requirements": {"flags": {"found_secret": true}}
-                },
-                {
-                    "file": "standard_dialogue.json"
-                }
-            ]
-        },
-        "requirements": {
-            "flags": {"previous_choice_made": true}
-        },
-        "failure_message": "You failed because..."
-    }
-]
+{
+    "id": 1,
+    "title": "Chapter Title",
+    "intro_dialogue": "intro.json",
+    "end_dialogue": "outro.json",
+    "available_characters": {
+        "Advisor Name": [
+            {
+                "file": "secret_dialogue.json",
+                "requirements": {"flags": {"found_secret": true}}
+            },
+            {
+                "file": "standard_dialogue.json"
+            }
+        ]
+    },
+    "requirements": {
+        "flags": {"previous_choice_made": true}
+    },
+    "failure_message": "You failed because..."
+}
 ```
 - `available_characters`: Can be a simple string (filename) or a list of objects.
     - If a list, the game checks them in order. The first one that meets its `requirements` (and hasn't been completed yet) is chosen.
