@@ -1,0 +1,74 @@
+{
+    "start_node": "root",
+    "nodes": [
+        {
+            "id": "root",
+            "text": "Advisor Chen bows low. 'My liege, the treasury is running low. We must act.'",
+            "speaker": "Advisor Chen",
+            "choices": [
+                {
+                    "text": "Raise taxes.",
+                    "next_id": "raise_taxes",
+                    "effects": {
+                        "stats": {
+                            "Wealth": 10,
+                            "Popularity": -10
+                        }
+                    }
+                },
+                {
+                    "text": "Cut military spending.",
+                    "next_id": "cut_military",
+                    "effects": {
+                        "stats": {
+                            "Wealth": 5,
+                            "Military": -5
+                        }
+                    }
+                },
+                {
+                    "text": "I need to investigate the accounts first.",
+                    "next_id": "investigate",
+                    "effects": {
+                        "flags": {
+                            "found_secret": true
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "id": "raise_taxes",
+            "text": "'The people will not like it, but it is necessary.'",
+            "speaker": "Advisor Chen",
+            "choices": [
+                {
+                    "text": "Do it.",
+                    "action": "leave"
+                }
+            ]
+        },
+        {
+            "id": "cut_military",
+            "text": "'The General will be furious, but we have no choice.'",
+            "speaker": "Advisor Chen",
+            "choices": [
+                {
+                    "text": "Make it so.",
+                    "action": "leave"
+                }
+            ]
+        },
+        {
+            "id": "investigate",
+            "text": "'Very well. Here are the keys to the archives.' (You found the secret ledger!)",
+            "speaker": "Advisor Chen",
+            "choices": [
+                {
+                    "text": "I will return.",
+                    "action": "leave"
+                }
+            ]
+        }
+    ]
+}

@@ -124,18 +124,61 @@ class Game:
             available_chars = chapter.get("available_characters", {})
             
             target_dialogue = None
-            if isinstance(available_chars, list):
-                if char["name"] in available_chars:
-                    target_dialogue = char['dialogue_file']
-            elif isinstance(available_chars, dict):
-                if char["name"] in available_chars:
-                    target_dialogue = available_chars[char["name"]]
             
-            if not target_dialogue:
-                continue
+            # Handle new list format or old string format
+            if isinstance(available_chars, dict):
+                if char["name"] in available_chars:
+                    char_dialogues = available_chars[char["name"]]
+                    
+                    # Handle list of conditional dialogues
+                    if isinstance(char_dialogues, list):
+                        for dialogue_conf in char_dialogues:
+                            # Check requirements
+                            reqs = dialogue_conf.get("requirements", {})
+                            allowed = True
+                            
+                            # Check stats
+                            if "stats" in reqs:
+                                for stat, value in reqs["stats"].items():
+                                    if self.player.get_stat(stat) < value:
+                                        allowed = False
+                                        break
+                            
+                            # Check flags
+                            if allowed and "flags" in reqs:
+                                for flag, value in reqs["flags"].items():
+                                    if self.player.get_flag(flag) != value:
+                                        allowed = False
+                                        break
+                                        
+                            if allowed:
+                                # Check if already completed
+                                if not self.player.has_completed_dialogue(dialogue_conf["file"]):
+                                    target_dialogue = dialogue_conf["file"]
+                                    break
+                                    
+                    # Handle simple string (legacy support for simple chapter config)
+                    elif isinstance(char_dialogues, str):
+                         if not self.player.has_completed_dialogue(char_dialogues):
+                            target_dialogue = char_dialogues
 
-            # Check if already talked to
-            if self.player.has_completed_dialogue(target_dialogue):
+            # If no specific dialogue found, check for generic fallback
+            if not target_dialogue:
+                 # Only show generic if we haven't found a specific one AND character is in the chapter
+                 # We assume if they are in available_characters, they are present.
+                 # But we might want to only show generic if they have NO other pending dialogues?
+                 # The user wants: "go back to a character and have a new dialogue tree... Otherwise, that character would say some generic message"
+                 # So if we found no target_dialogue above, we use generic.
+                 
+                 # Check if character is even in this chapter's available list
+                 is_present = False
+                 if isinstance(available_chars, dict) and char["name"] in available_chars:
+                     is_present = True
+                 
+                 if is_present:
+                     target_dialogue = char.get("generic_dialogue")
+
+            if not target_dialogue:
                 continue
 
             options.append({

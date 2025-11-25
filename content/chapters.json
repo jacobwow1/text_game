@@ -5,7 +5,19 @@
         "intro_dialogue": "chapter1_intro.json",
         "end_dialogue": "chapter1_end.json",
         "available_characters": {
-            "Advisor Chen": "sample.json"
+            "Advisor Chen": [
+                {
+                    "file": "chen_secret.json",
+                    "requirements": {
+                        "flags": {
+                            "found_secret": true
+                        }
+                    }
+                },
+                {
+                    "file": "chen_default.json"
+                }
+            ]
         }
     },
     {

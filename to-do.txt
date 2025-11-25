@@ -1,7 +1,5 @@
-1. BUG: Why does the characters.json feature only 1 "dialogue_file" per character, when characters speak in multiple files in multiple chapters?
+1. Split chapters into their own files in a folder called chapters.
 
 2. Implement a feature where a chapter can end by time passing. I should be able to put a time constraint property in a chapter, and then at certain dialogue points, I should be able to increment the time (which would effect the time in the heading).
 
-3. Give players the ability to speak to characters multiple times within a chapter. They can't repeat the same conversations, but they may be able to go back to a character and have a new dialogue tree if they have met a certain requirement (flags or stats)
-
-4. Since the game is choice based, the chapters should be branching based on the flags and stats a player has. Chapter 2 could look different for one player compared to another.
+3. Since the game is choice based, the chapters should be branching based on the flags and stats a player has. Chapter 2 could look different for one player compared to another.

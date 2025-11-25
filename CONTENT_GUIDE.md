@@ -7,13 +7,13 @@ This framework allows you to create a story-driven RPG using JSON files.
 - `content/characters.json`: List of characters in the game.
 - `content/dialogues/`: Folder containing dialogue trees.
 
-## 1. Defining Stats
-Edit `content/config.json` to change the available stats and starting points.
+## 1. Adding Stats
+Edit `content/config.json` to add new stats and starting points.
 ```json
 {
     "stats": {
-        "Logic": 1,
-        "Empathy": 1
+        "Ratio": 1,
+        "Providentia": 1
         ...
     },
     "starting_points": 8
@@ -27,11 +27,13 @@ Edit `content/characters.json` to add new people to the office Hub.
     {
         "name": "Advisor Name",
         "role": "Job Title",
-        "dialogue_file": "default.json" 
+        "role": "Job Title",
+        "generic_dialogue": "generic_fallback.json"
     }
 ]
 ```
-*Note: The `dialogue_file` here is a default/fallback. Specific dialogues are usually defined in `chapters.json`.*
+- `generic_dialogue`: (Optional) A file to play if the character has no other specific things to say.
+*Note: All specific dialogues must be defined in `chapters.json`.*
 
 ## 3. Defining Chapters
 Edit `content/chapters.json` to create the story flow.
@@ -43,7 +45,15 @@ Edit `content/chapters.json` to create the story flow.
         "intro_dialogue": "intro.json",
         "end_dialogue": "outro.json",
         "available_characters": {
-            "Advisor Name": "chapter1_advisor.json"
+            "Advisor Name": [
+                {
+                    "file": "secret_dialogue.json",
+                    "requirements": {"flags": {"found_secret": true}}
+                },
+                {
+                    "file": "standard_dialogue.json"
+                }
+            ]
         },
         "requirements": {
             "flags": {"previous_choice_made": true}
@@ -52,7 +62,9 @@ Edit `content/chapters.json` to create the story flow.
     }
 ]
 ```
-- `available_characters`: A dictionary mapping character names to their dialogue file for this chapter.
+- `available_characters`: Can be a simple string (filename) or a list of objects.
+    - If a list, the game checks them in order. The first one that meets its `requirements` (and hasn't been completed yet) is chosen.
+    - If no dialogue is found, the character's `generic_dialogue` is used.
 - `requirements`: (Optional) Conditions to unlock this chapter.
 
 ## 4. Writing Dialogue
@@ -72,13 +84,13 @@ Create a new `.json` file in `content/dialogues/`.
 - `text`: What the player sees.
 - `next_id`: The ID of the node to go to next.
 - `requirements`: (Optional) Conditions to see/pick this choice.
-    - `stats`: `{"Logic": 4}`
+    - `stats`: `{"Ratio": 4}`
     - `flags`: `{"met_before": true}`
 ### Effects
 Modify player stats or flags when a choice is made.
 ```json
 "effects": {
-    "stats": {"Logic": 1},
+    "stats": {"Ratio": 1},
     "flags": {"met_advisor": true},
     "end_chapter": true
 }
@@ -96,9 +108,9 @@ Modify player stats or flags when a choice is made.
     "speaker": "Bob",
     "choices": [
         {
-            "text": "[EMPATHY] You look sad.",
+            "text": "[PROVIDENTIA] You look sad.",
             "next_id": "comfort",
-            "requirements": {"stats": {"Empathy": 3}}
+            "requirements": {"stats": {"Providentia": 3}}
         }
     ]
 }
