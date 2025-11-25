@@ -1,24 +1,30 @@
 {
     "stats": {
-        "Logic": 1,
-        "Empathy": 1,
-        "Authority": 1,
-        "Rhetoric": 1,
-        "Public Approval": 50,
-        "Wealth Approval": 50,
-        "Military Loyalty": 50
+        "Ratio": 1,
+        "Providentia": 1,
+        "Eloquentia": 1,
+        "Imperium": 1,
+        "Pecunia": 50,
+        "Productio": 50,
+        "Favor Populi": 50,
+        "Pax Civica": 50,
+        "Potentia Militum": 50,
+        "Status Orbis": 50
     },
     "stat_categories": {
         "Personality": [
-            "Logic",
-            "Empathy",
-            "Authority",
-            "Rhetoric"
+            "Ratio",
+            "Providentia",
+            "Eloquentia",
+            "Imperium"
         ],
         "Politics": [
-            "Public Approval",
-            "Wealth Approval",
-            "Military Loyalty"
+            "Pecunia",
+            "Productio",
+            "Favor Populi",
+            "Pax Civica",
+            "Potentia Militum",
+            "Status Orbis"
         ]
     },
     "starting_points": 8

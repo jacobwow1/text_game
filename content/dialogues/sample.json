@@ -11,11 +11,11 @@
                     "next_id": "report_view"
                 },
                 {
-                    "text": "[LOGIC] Is there anything you're hiding?",
+                    "text": "[RATIO] Is there anything you're hiding?",
                     "next_id": "interrogate",
                     "requirements": {
                         "stats": {
-                            "Logic": 2
+                            "Ratio": 2
                         }
                     }
                 }
@@ -40,7 +40,7 @@
                     "next_id": "print_money",
                     "effects": {
                         "stats": {
-                            "Authority": -1
+                            "Imperium": -1
                         }
                     }
                 }
