@@ -9,6 +9,11 @@
                 {
                     "text": "Raise taxes.",
                     "next_id": "raise_taxes",
+                    "requirements": {
+                        "stats": {
+                            "Ratio": 3
+                        }
+                    },
                     "effects": {
                         "stats": {
                             "Pecunia": 10,

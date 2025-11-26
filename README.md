@@ -1,10 +1,11 @@
-# Text RPG Content Guide
+# Text RPG Framework
 
-This framework allows you to create a story-driven RPG using JSON files.
+This is the framework for a custom text-based narrative RPG assembled from JSON files and run in Python.
 
 ## Directory Structure
 - `content/config.json`: Game settings and stats.
 - `content/characters.json`: List of characters in the game.
+- `content/chapters/`: Folder containing chapter files, linking dialogues together.
 - `content/dialogues/`: Folder containing dialogue trees.
 
 ## 1. Adding Stats
@@ -12,11 +13,11 @@ Edit `content/config.json` to add new stats and starting points.
 ```json
 {
     "stats": {
-        "Ratio": 1,
-        "Providentia": 1
+        "Intelligence": 1,
+        "Wisdom": 1
         ...
     },
-    "starting_points": 8
+    "starting_points": 4
 }
 ```
 
@@ -84,35 +85,85 @@ Create a new `.json` file in `content/dialogues/`.
 - `text`: What the player sees.
 - `next_id`: The ID of the node to go to next.
 - `requirements`: (Optional) Conditions to see/pick this choice.
-    - `stats`: `{"Ratio": 4}`
+    - `stats`: `{"Intelligence": 4}`
     - `flags`: `{"met_before": true}`
 ### Effects
 Modify player stats or flags when a choice is made.
 ```json
 "effects": {
-    "stats": {"Ratio": 1},
+    "stats": {"Wisdom": 1},
     "flags": {"met_advisor": true},
     "end_chapter": true
 }
 ```
 - `effects`: (Optional) Changes to game state.
     - `flags`: Set flags (e.g., `"met_advisor": true`).
-    - `stats`: Modify stats (e.g., `"Influence": 1`).
+    - `stats`: Modify stats (e.g., `"Wisdom": 1`).
     - `increment_time`: (Optional) Boolean. If true, advances time by 1 slot.
     - `end_chapter`: (Optional) Boolean. If true, ends the chapter immediately. Use this for major story decisions that advance time.
 
 ### Example
 ```json
 {
-    "id": "greeting",
-    "text": "Hello.",
-    "speaker": "Bob",
-    "choices": [
+    "start_node": "greeting",
+    "nodes": [
         {
-            "text": "[PROVIDENTIA] You look sad.",
-            "next_id": "comfort",
-            "requirements": {"stats": {"Providentia": 3}}
+            "id": "greeting",
+            "text": "Hello.",
+            "speaker": "Bob",
+            "choices": [
+                {
+                    "text": "[WISDOM] Are you okay? You look sad.",
+                    "next_id": "comfort",
+                    "requirements": {
+                        "stats": {
+                            "Wisdom": 3
+                        }
+                    },
+                    "effects": {
+                        "stats": {
+                            "Friendship": 1
+                        }
+                    }
+                },
+                {
+                    "text": "Hey Bob, how are you?",
+                    "next_id": "clueless"
+                }
+            ]
+        },
+        {
+            "id": "comfort",
+            "text": "Yeah, I got a bad score on my math exam. Maybe we can study together tomorrow.",
+            "speaker": "Bob",
+            "choices": [
+                {
+                    "text": "That sounds like a great idea. I'll see you tomorrow.",
+                    "action": "leave",
+                    "effects": {
+                        "flags": {
+                            "study_tomorrow": true
+                        }
+                    }
+                }
+            ]
         }
+        {
+            "id": "clueless",
+            "text": "Don't you know? I just failed my math exam!",
+            "speaker": "Bob",
+            "choices": [
+                {
+                    "text": "I'm sorry to hear that. We can study together tomorrow.",
+                    "action": "leave",
+                    "effects": {
+                        "flags": {
+                            "study_tomorrow": true
+                        }
+                    }
+                }
+            ]
+        }    
     ]
 }
 ```
