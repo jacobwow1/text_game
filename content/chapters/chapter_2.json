@@ -4,7 +4,7 @@
     "intro_dialogue": "chapter_2/chapter2_intro.json",
     "end_dialogue": "chapter_2/chapter2_end.json",
     "available_characters": {
-        "Lucius": "chapter_2/chapter2_chen.json"
+        "Advisor Chen": "chapter_2/chapter2_chen.json"
     },
     "requirements": {
         "flags": {

@@ -80,6 +80,7 @@ Create a new `.json` file in `content/dialogues/`.
 - `text`: The dialogue text.
 - `speaker`: Name of the speaker.
 - `choices`: List of options.
+*Note: If choices are left empty, the dialogue will be given an "End conversation" option.*
 
 ### Choice Fields
 - `text`: What the player sees.
@@ -87,6 +88,7 @@ Create a new `.json` file in `content/dialogues/`.
 - `requirements`: (Optional) Conditions to see/pick this choice.
     - `stats`: `{"Intelligence": 4}`
     - `flags`: `{"met_before": true}`
+
 ### Effects
 Modify player stats or flags when a choice is made.
 ```json
@@ -100,7 +102,12 @@ Modify player stats or flags when a choice is made.
     - `flags`: Set flags (e.g., `"met_advisor": true`).
     - `stats`: Modify stats (e.g., `"Wisdom": 1`).
     - `increment_time`: (Optional) Boolean. If true, advances time by 1 slot.
-    - `end_chapter`: (Optional) Boolean. If true, ends the chapter immediately. Use this for major story decisions that advance time.
+    - `end_chapter`: (Optional) Boolean. If true, ends the chapter immediately. Use this for major story decisions that advance time.    
+
+### Actions
+Modify the player's state when a choice is made.
+- `action`: (Optional) Actions to perform when the choice is made.
+    - `leave`: (Optional) Boolean. If true, ends conversation ends.
 
 ### Example
 ```json
