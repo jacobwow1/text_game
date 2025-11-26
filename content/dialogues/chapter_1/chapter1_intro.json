@@ -3,22 +3,33 @@
     "nodes": [
         {
             "id": "start",
-            "text": "The phone rings. It's the President. 'We have a situation.'",
+            "text": "Following a revolt by the people and the previous consul's sudden disappearance, you have been appointed the new consul of Concodria. As you sit in your office contemplating the immense challenges ahead, one of your recently appointed advisors, Lucius (Minister of the Treasury), steps in to your office.",
             "speaker": "Narrator",
             "choices": [
                 {
-                    "text": "Pick up the phone.",
-                    "next_id": "pickup"
+                    "text": "Good morning Lucius. What news do you bring?",
+                    "next_id": "lucius_entry"
                 }
             ]
         },
         {
-            "id": "pickup",
-            "text": "'The economy is crashing. Fix it.' Click.",
-            "speaker": "President",
+            "id": "lucius_entry",
+            "text": "Good morning Consul. I trust you are settling into your new role. I have been reviewing the state of our finances following the previous consul's sudden 'removal', and there are several pressing matters we need to address to stabilize the economy.",
+            "speaker": "Lucius",
             "choices": [
                 {
-                    "text": "I'd better get to work.",
+                    "text": "What are the most urgent financial issues we face?",
+                    "next_id": "problems"
+                }
+            ]
+        },
+        {
+            "id": "problems",
+            "text": "Our treasury is severely depleted due to mismanagement and corruption under the previous administration. At this point, we are on the verge of bankruptcy. We need to implement strict fiscal policies to reduce spending and increase revenue. I trust that with your leadership and your advisors' aid, we can settle our accounts in short time.",
+            "speaker": "Lucius",
+            "choices": [
+                {
+                    "text": "Thank you for the briefing, Lucius. Let's get to work on these issues immediately.",
                     "next_id": null
                 }
             ]
