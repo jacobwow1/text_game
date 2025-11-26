@@ -143,18 +143,13 @@ Modify the player's state when a choice is made.
             "id": "comfort",
             "text": "Yeah, I got a bad score on my math exam. Maybe we can study together tomorrow.",
             "speaker": "Bob",
-            "choices": [
-                {
-                    "text": "That sounds like a great idea. I'll see you tomorrow.",
-                    "action": "leave",
-                    "effects": {
-                        "flags": {
-                            "study_tomorrow": true
-                        }
-                    }
+            "effects": {
+                "flags": {
+                    "study_tomorrow": true
                 }
-            ]
-        }
+            },
+            "choices": []
+        },
         {
             "id": "clueless",
             "text": "Don't you know? I just failed my math exam!",
