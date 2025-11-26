@@ -1,7 +1,42 @@
 [
     {
-        "name": "Advisor Chen",
+        "name": "Marcus",
+        "role": "First Minister",
+        "generic_dialogue": "common/marcus_generic.json"
+    },
+    {
+        "name": "Lucius",
         "role": "Minister of the Treasury",
-        "generic_dialogue": "common/chen_generic.json"
+        "generic_dialogue": "common/lucius_generic.json"
+    },
+    {
+        "name": "Gaius",
+        "role": "Minister of Industry",
+        "generic_dialogue": "common/gaius_generic.json"
+    },
+    {
+        "name": "Tacitus",
+        "role": "Minister of Foreign Policy",
+        "generic_dialogue": "common/tacitus_generic.json"
+    },
+    {
+        "name": "Brutus",
+        "role": "Praetor of Justice",
+        "generic_dialogue": "common/brutus_generic.json"
+    },
+    {
+        "name": "Publius",
+        "role": "Tribune of the People",
+        "generic_dialogue": "common/publius_generic.json"
+    },
+    {
+        "name": "Titus",
+        "role": "Legate Major",
+        "generic_dialogue": "common/titus_generic.json"
+    },
+    {
+        "name": "Decimus",
+        "role": "Censor of Information",
+        "generic_dialogue": "common/decimus_generic.json"
     }
 ]
