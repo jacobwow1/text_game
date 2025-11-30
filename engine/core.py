@@ -27,7 +27,9 @@ class Game:
             "hub_options": [],
             "history": [],
             "chapter": None,
-            "points_remaining": self.config.get("starting_points", 8)
+            "chapter": None,
+            "points_remaining": self.config.get("starting_points", 8),
+            "sequence_index": -1
         }
         
         self.running = True
@@ -157,19 +159,33 @@ class Game:
             self.state["current_node"] = node
             
             # Update history if new node
+            # Update history if new node
             if node and node["id"] != self.last_node_id:
                 speaker = node.get("speaker", "Unknown")
                 self.state["history"].append((speaker, node["text"]))
                 self.last_node_id = node["id"]
+                self.state["sequence_index"] = -1
 
-            self.state["choices"] = self.dialogue_manager.get_valid_choices(self.player)
-            
-            # Fix soft-lock: If no choices, add a "Leave" option
-            if not self.state["choices"]:
-                self.state["choices"].append({
-                    "text": "[End Conversation]",
-                    "action": "leave"
-                })
+            # Handle sequence
+            in_sequence = False
+            if node and "sequence" in node:
+                seq = node["sequence"]
+                if self.state["sequence_index"] < len(seq) - 1:
+                    in_sequence = True
+                    self.state["choices"] = [{
+                        "text": "Continue",
+                        "action": "continue_sequence"
+                    }]
+
+            if not in_sequence:
+                self.state["choices"] = self.dialogue_manager.get_valid_choices(self.player)
+                
+                # Fix soft-lock: If no choices, add a "Leave" option
+                if not self.state["choices"]:
+                    self.state["choices"].append({
+                        "text": "[End Conversation]",
+                        "action": "leave"
+                    })
 
     def update_hub_options(self):
         options = []
@@ -325,6 +341,18 @@ class Game:
                 # Handle "Leave" action
                 if choice.get("action") == "leave":
                     self.finish_dialogue()
+                    return
+
+                # Handle "Continue" action
+                if choice.get("action") == "continue_sequence":
+                    self.state["sequence_index"] += 1
+                    idx = self.state["sequence_index"]
+                    node = self.state["current_node"]
+                    if node and "sequence" in node and 0 <= idx < len(node["sequence"]):
+                        speech = node["sequence"][idx]
+                        speaker = speech.get("speaker", node.get("speaker", "Unknown"))
+                        text = speech.get("text", "...")
+                        self.state["history"].append((speaker, text))
                     return
 
                 # Add player choice to history

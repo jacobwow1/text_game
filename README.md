@@ -79,6 +79,8 @@ Create a new `.json` file in `content/dialogues/`.
 - `id`: Unique string ID.
 - `text`: The dialogue text.
 - `speaker`: Name of the speaker.
+- `sequence`: (Optional) A list of additional dialogue nodes to show in sequence.
+    - Each object in the list has a `speaker` and `text` field.
 - `choices`: List of options.
 *Note: If choices are left empty, the dialogue will be given an "End conversation" option.*
 
