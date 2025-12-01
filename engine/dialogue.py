@@ -11,7 +11,9 @@ class DialogueManager:
         path = os.path.join(self.content_dir, filename)
         with open(path, 'r') as f:
             self.current_dialogue = json.load(f)
-        self.current_node_id = self.current_dialogue.get("start_node", "root")
+        
+        start_ref = self.current_dialogue.get("start_node", "root")
+        self.current_node_id = self._resolve_node_id(start_ref, player)
         
         if player:
             node = self.get_current_node()
@@ -29,6 +31,43 @@ class DialogueManager:
         for node in nodes:
             if node["id"] == self.current_node_id:
                 return node
+        return None
+
+    def _resolve_node_id(self, id_ref, player):
+        """
+        Resolves a node ID reference which can be a string or a list of conditional targets.
+        """
+        if isinstance(id_ref, str):
+            return id_ref
+        
+        if isinstance(id_ref, list):
+            for target in id_ref:
+                # Check requirements
+                reqs = target.get("requirements", {})
+                allowed = True
+                
+                if player:
+                    # Check stats
+                    if "stats" in reqs:
+                        for stat, value in reqs["stats"].items():
+                            if player.get_stat(stat) < value:
+                                allowed = False
+                                break
+                    
+                    # Check flags
+                    if allowed and "flags" in reqs:
+                        for flag, value in reqs["flags"].items():
+                            if player.get_flag(flag) != value:
+                                allowed = False
+                                break
+                
+                if allowed:
+                    return target["id"]
+            
+            # If no match found, return None or maybe the last one?
+            # For now return None, which will result in end of dialogue or error
+            return None
+            
         return None
 
     def _apply_effects(self, effects, player):
@@ -77,7 +116,8 @@ class DialogueManager:
             # Apply choice effects
             self._apply_effects(choice.get("effects", {}), player)
 
-            self.current_node_id = choice.get("next_id")
+            next_ref = choice.get("next_id")
+            self.current_node_id = self._resolve_node_id(next_ref, player)
             
             # Apply new node effects
             new_node = self.get_current_node()

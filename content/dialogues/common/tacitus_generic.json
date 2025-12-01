@@ -1,0 +1,58 @@
+{
+    "start_node": [
+        {
+            "id": "high_status",
+            "requirements": {
+                "stats": {
+                    "Status Orbis": 80
+                }
+            }
+        },
+        {
+            "id": "medium_status",
+            "requirements": {
+                "stats": {
+                    "Status Orbis": 50
+                }
+            }
+        },
+        {
+            "id": "low_status"
+        }
+    ],
+    "nodes": [
+        {
+            "id": "high_status",
+            "text": "The world has great trust in us, consul. This will open up many opportunities for us.",
+            "speaker": "Tacitus",
+            "choices": [
+                {
+                    "text": "Thank you, Tacitus.",
+                    "action": "leave"
+                }
+            ]
+        },
+        {
+            "id": "medium_status",
+            "text": "The world is indifferent to us, consul. We must do what we can to improve the favor of other nations.",
+            "speaker": "Tacitus",
+            "choices": [
+                {
+                    "text": "I will see to it, Tacitus.",
+                    "action": "leave"
+                }
+            ]
+        },
+        {
+            "id": "low_status",
+            "text": "The world has little trust in us, consul. We must do what we can to improve the favor of other nations.",
+            "speaker": "Tacitus",
+            "choices": [
+                {
+                    "text": "I will see to it, Tacitus.",
+                    "action": "leave"
+                }
+            ]
+        }
+    ]
+}

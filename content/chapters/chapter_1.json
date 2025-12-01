@@ -4,19 +4,39 @@
     "intro_dialogue": "chapter_1/chapter1_intro.json",
     "end_dialogue": "chapter_1/chapter1_end.json",
     "available_characters": {
+        "Marcus": [
+            {
+                "file": "chapter_1/marcus_overview.json"
+            }
+        ],
+        "Publius": [
+            {
+                "file": "chapter_1/publius_taxes.json"
+            }
+        ],
+        "Titus": [
+            {
+                "file": "chapter_1/titus_search.json"
+            }
+        ],
+        "Tacitus": [
+            {
+                "file": "chapter_1/tacitus_support.json"
+            }
+        ],
         "Lucius": [
             {
-                "file": "chapter_1/chen_secret.json",
+                "file": "chapter_1/lucius_solution.json",
                 "requirements": {
-                    "flags": {
-                        "found_secret": true
+                    "stats": {
+                        "Pecunia": 25
                     }
                 }
             },
             {
-                "file": "chapter_1/chen_default.json"
+                "file": "chapter_1/lucius_taxes.json"
             }
         ]
     },
-    "time_limit": 2
+    "time_limit": 3
 }

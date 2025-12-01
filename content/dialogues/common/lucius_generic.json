@@ -1,0 +1,58 @@
+{
+    "start_node": [
+        {
+            "id": "high_money",
+            "requirements": {
+                "stats": {
+                    "Pecunia": 80
+                }
+            }
+        },
+        {
+            "id": "medium_money",
+            "requirements": {
+                "stats": {
+                    "Pecunia": 50
+                }
+            }
+        },
+        {
+            "id": "low_money"
+        }
+    ],
+    "nodes": [
+        {
+            "id": "high_money",
+            "text": "Funds are plentiful, consul. It is best we keep it that way.",
+            "speaker": "Lucius",
+            "choices": [
+                {
+                    "text": "I will see to it, Lucius.",
+                    "action": "leave"
+                }
+            ]
+        },
+        {
+            "id": "medium_money",
+            "text": "Funds are sufficient, consul. Perhaps we should do what we can to increase them.",
+            "speaker": "Lucius",
+            "choices": [
+                {
+                    "text": "I will see to it, Lucius.",
+                    "action": "leave"
+                }
+            ]
+        },
+        {
+            "id": "low_money",
+            "text": "Funds are scarce, consul. We must do what we can to increase them.",
+            "speaker": "Lucius",
+            "choices": [
+                {
+                    "text": "I will see to it, Lucius.",
+                    "action": "leave"
+                }
+            ]
+        }
+    ]
+}

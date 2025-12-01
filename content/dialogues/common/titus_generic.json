@@ -1,0 +1,58 @@
+{
+    "start_node": [
+        {
+            "id": "high_army_strength",
+            "requirements": {
+                "stats": {
+                    "Potentia Militum": 80
+                }
+            }
+        },
+        {
+            "id": "medium_army_strength",
+            "requirements": {
+                "stats": {
+                    "Potentia Militum": 50
+                }
+            }
+        },
+        {
+            "id": "low_army_strength"
+        }
+    ],
+    "nodes": [
+        {
+            "id": "high_army_strength",
+            "text": "Your army is strong, consul. At your word, our enemies will cower in fear.",
+            "speaker": "Titus",
+            "choices": [
+                {
+                    "text": "Thank you, Titus.",
+                    "action": "leave"
+                }
+            ]
+        },
+        {
+            "id": "medium_army_strength",
+            "text": "Your army is sufficient, consul. It is best we keep it that way.",
+            "speaker": "Titus",
+            "choices": [
+                {
+                    "text": "I will see to it, Titus.",
+                    "action": "leave"
+                }
+            ]
+        },
+        {
+            "id": "low_army_strength",
+            "text": "Consul, we must imporve our military strength. We may not fare well in battle if we are not prepared.",
+            "speaker": "Titus",
+            "choices": [
+                {
+                    "text": "I will see to it, Titus.",
+                    "action": "leave"
+                }
+            ]
+        }
+    ]
+}

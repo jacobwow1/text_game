@@ -3,11 +3,11 @@
     "nodes": [
         {
             "id": "root",
-            "text": "'I am busy calculating the projections, my liege. Please excuse me.'",
-            "speaker": "Advisor Chen",
+            "text": "I will keep you informed, consul. If anything comes up, you will hear from me right away.",
+            "speaker": "Marcus",
             "choices": [
                 {
-                    "text": "Carry on.",
+                    "text": "Thank you, Marcus.",
                     "action": "leave"
                 }
             ]

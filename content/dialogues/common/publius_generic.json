@@ -1,0 +1,58 @@
+{
+    "start_node": [
+        {
+            "id": "high_favor",
+            "requirements": {
+                "stats": {
+                    "Favor Populi": 80
+                }
+            }
+        },
+        {
+            "id": "medium_favor",
+            "requirements": {
+                "stats": {
+                    "Favor Populi": 50
+                }
+            }
+        },
+        {
+            "id": "low_favor"
+        }
+    ],
+    "nodes": [
+        {
+            "id": "high_favor",
+            "text": "It seems you have the favor of the people, consul. It is best we keep it that way.",
+            "speaker": "Publius",
+            "choices": [
+                {
+                    "text": "I will see to it, Publius.",
+                    "action": "leave"
+                }
+            ]
+        },
+        {
+            "id": "medium_favor",
+            "text": "The people are content with your rule, consul. It is best we keep it that way.",
+            "speaker": "Publius",
+            "choices": [
+                {
+                    "text": "I will see to it, Publius.",
+                    "action": "leave"
+                }
+            ]
+        },
+        {
+            "id": "low_favor",
+            "text": "The people have many grievances, consul. It is best you address them right away.",
+            "speaker": "Publius",
+            "choices": [
+                {
+                    "text": "I will see to it, Publius.",
+                    "action": "leave"
+                }
+            ]
+        }
+    ]
+}
