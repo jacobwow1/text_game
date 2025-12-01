@@ -72,7 +72,7 @@ Create new `.json` files in `content/chapters/` (e.g., `chapter_1.json`, `chapte
 Create a new `.json` file in `content/dialogues/`.
 
 ### Structure
-- `start_node`: The ID of the first node.
+- `start_node`: The ID of the first node. This can also be a list of dialogue node IDs with requirements.
 - `nodes`: A list of dialogue nodes.
 
 ### Node Fields
