@@ -12,7 +12,7 @@
             ],
             "choices": [
                 {
-                    "text": "[RATIO] Very few things in government are simple and effective without having some drawbacks. Please explain.",
+                    "text": "[RATIO] Very few things in government are simple and effective without having some drawbacks. Be honest with me.",
                     "next_id": "reluctant",
                     "requirements": {
                         "stats": {
@@ -28,7 +28,7 @@
         },
         {
             "id": "reluctant",
-            "text": "Well sir, that is true... Unfortunatly, this solution may not be as popular among the people. Though it will generate a lot of revenue.",
+            "text": "Well sir, that is true... Unfortunatly, this solution may not be popular among the people. However, it will generate a lot of revenue.",
             "speaker": "Lucius",
             "choices": [
                 {
@@ -37,7 +37,7 @@
                 },
                 {
                     "text": "[IMPERIUM] Then is it truly an effective solution? You know we can't afford to get on the people's bad side at a time like this.",
-                    "next_id": "defensive",
+                    "next_id": "no_taxing",
                     "requirements": {
                         "stats": {
                             "Imperium": 2
@@ -53,7 +53,7 @@
             "choices": [
                 {
                     "text": "[PROVIDENTIA] I don't think this is a good idea. The previous administration was very corrupt, and I fear the people may think that we are stealing more of their money.",
-                    "next_id": "defensive",
+                    "next_id": "no_taxing",
                     "requirements": {
                         "stats": {
                             "Providentia": 2
@@ -61,17 +61,33 @@
                     }
                 },
                 {
-                    "text": ""
+                    "text": "[ELOQUENTIA] Let's go through with it. I think we can make that work, but I will need to give an address to the nation and win over the people's hearts and minds on this issue.",
+                    "next_id": "taxing",
+                    "requirements": {
+                        "stats": {
+                            "Eloquentia": 3
+                        }
+                    },
+                    "effects": {
+                        "flags": {
+                            "address_nation": true,
+                            "treasury_fixed": true
+                        },
+                        "stats": {
+                            "Pecunia": 45,
+                            "Favor Populi": -25
+                        } 
+                    }
                 }
             ]
         },
         {
-            "id": "investigate",
-            "text": "'Very well. Here are the keys to the archives.' (You found the secret ledger!)",
-            "speaker": "Advisor Chen",
+            "id": "no_taxing",
+            "text": "Very well, consul. I trust that you will find another source of revenue. But be warned, if this matter goes unresolved, Concordia will not survive.",
+            "speaker": "Lucius",
             "choices": [
                 {
-                    "text": "I will return.",
+                    "text": "I understand. I will figure something out.",
                     "action": "leave"
                 }
             ]
