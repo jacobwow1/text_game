@@ -37,7 +37,7 @@
                 },
                 {
                     "text": "[IMPERIUM] Then is it truly an effective solution? You know we can't afford to get on the people's bad side at a time like this.",
-                    "next_id": "no_taxing",
+                    "next_id": "alternative",
                     "requirements": {
                         "stats": {
                             "Imperium": 2
@@ -53,7 +53,7 @@
             "choices": [
                 {
                     "text": "[PROVIDENTIA] I don't think this is a good idea. The previous administration was very corrupt, and I fear the people may think that we are stealing more of their money.",
-                    "next_id": "no_taxing",
+                    "next_id": "alternative",
                     "requirements": {
                         "stats": {
                             "Providentia": 2
@@ -78,6 +78,50 @@
                             "Favor Populi": -25
                         } 
                     }
+                },
+                {
+                    "text": "I would rather not increase taxes at this time. There may be better solutions out there.",
+                    "next_id": "no_taxing"
+                },
+                {
+                    "text": "Let's do it then. This solution may be the fastest way to restore our reserves.",
+                    "next_id": "taxing",
+                    "effects": {
+                        "flags": {
+                            "treasury_fixed": true
+                        },
+                        "stats": {
+                            "Pecunia": 45,
+                            "Favor Populi": -25
+                        }
+                    }
+                }    
+            ]   
+        },
+        {
+            "id": "alternative",
+            "text": "I see your concerns, consul. Perhaps we can explore other avenues, such as cutting unnecessary expenditures. If you could give me some time, I am sure I can find other solutions that won't upset the populace as much.",
+            "speaker": "Lucius",
+            "effects": {
+                "flags": {
+                    "explore_alternatives": true
+                }
+            },
+            "choices": [
+                {
+                    "text": "Thank you, Lucius. I will check back in a bit.",
+                    "action": "leave"
+                }
+            ]
+        },
+        {
+            "id": "taxing",
+            "text": "Excellent decision, consul. I will begin the preparations for the tax increase immediately. Together, we will ensure the prosperity of Concordia.",
+            "speaker": "Lucius",
+            "choices": [
+                {
+                    "text": "Thank you, Lucius. I appreciate your support.",
+                    "action": "leave"
                 }
             ]
         },
@@ -87,7 +131,7 @@
             "speaker": "Lucius",
             "choices": [
                 {
-                    "text": "I understand. I will figure something out.",
+                    "text": "I understand, Lucius. I will work with the other ministers to find a solution.",
                     "action": "leave"
                 }
             ]
