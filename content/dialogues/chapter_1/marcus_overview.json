@@ -1,0 +1,134 @@
+{
+    "start_node": "root",
+    "nodes": [
+        {
+            "id": "root",
+            "text": "Greetings, consul. It seems as though the previous leader left quite the financial mess for us.",
+            "speaker": "Marcus",
+            "sequence": [
+                {
+                    "speaker": "Marcus",
+                    "text": "This morning I spoke with several advisors and they all agree that we need to address this issue. However, it seems they all have a very different idea of how to do it."
+                },
+                {
+                    "speaker": "Marcus",
+                    "text": "Lucius, Titus, and Tacitus would like to propose their own solutions. I believe Publius also has a word for you."
+                }
+            ],
+            "choices": [
+                {
+                    "text": "What does Lucius have to say?",
+                    "next_id": "lucius_summary"
+                },
+                {
+                    "text": "What does Titus have to say?",
+                    "next_id": "titus_summary"
+                },
+                {
+                    "text": "What does Tacitus have to say?",
+                    "next_id": "tacitus_summary"
+                },
+                {
+                    "text": "What does Publius have to say?",
+                    "next_id": "publius_summary"
+                },
+                {
+                    "text": "Thank you, Marcus. We will figure out a solution.",
+                    "action": "leave"
+                }
+            ]
+        },
+        {
+            "id": "lucius_summary",
+            "text": "Lucius believes that we need to raise taxes to cover the deficit. Although it will not be popular, it is likely an effective solution.",
+            "speaker": "Marcus",
+            "choices": [
+                {
+                    "text": "What does Titus have to say?",
+                    "next_id": "titus_summary"
+                },
+                {
+                    "text": "What does Tacitus have to say?",
+                    "next_id": "tacitus_summary"
+                },
+                {
+                    "text": "What does Publius have to say?",
+                    "next_id": "publius_summary"
+                },
+                {
+                    "text": "Thank you, Marcus. We will figure out a solution.",
+                    "action": "leave"
+                }
+            ]
+        },
+        {
+            "id": "titus_summary",
+            "text": "Titus believes we could use the military to investigate the source of the deficit, and take back any assets that were stolen. It won't bring in funds right away, but it could have a big pay off.",
+            "speaker": "Marcus",
+            "choices": [
+                {
+                    "text": "What does Lucius have to say?",
+                    "next_id": "lucius_summary"
+                },
+                {
+                    "text": "What does Tacitus have to say?",
+                    "next_id": "tacitus_summary"
+                },
+                {
+                    "text": "What does Publius have to say?",
+                    "next_id": "publius_summary"
+                },
+                {
+                    "text": "Thank you, Marcus. We will figure out a solution.",
+                    "action": "leave"
+                }
+            ]
+        },
+        {
+            "id": "tacitus_summary",
+            "text": "Tacitus believes we could make negotiations with our allies to raise funds. We will have to sacrifice something in return, but it could be worth it.",
+            "speaker": "Marcus",
+            "choices": [
+                {
+                    "text": "What does Lucius have to say?",
+                    "next_id": "lucius_summary"
+                },
+                {
+                    "text": "What does Titus have to say?",
+                    "next_id": "titus_summary"
+                },
+                {
+                    "text": "What does Publius have to say?",
+                    "next_id": "publius_summary"
+                },
+                {
+                    "text": "Thank you, Marcus. We will figure out a solution.",
+                    "action": "leave"
+                }
+            ]
+        },
+        {
+            "id": "publius_summary",
+            "text": "Publius wants to make sure we have a solid plan before we make any decisions. He is concerned some solutions may be very unpopular or result in civil unrest.",
+            "speaker": "Advisor Chen",
+            "choices": [
+                {
+                    "text": "What does Lucius have to say?",
+                    "next_id": "lucius_summary"
+                },
+                {
+                    "text": "What does Titus have to say?",
+                    "next_id": "titus_summary"
+                },
+                {
+                    "text": "What does Tacitus have to say?",
+                    "next_id": "tacitus_summary"
+                },
+                {
+                    "text": "Thank you, Marcus. We will figure out a solution.",
+                    "action": "leave"
+                }
+            ]
+        }
+    ]
+}

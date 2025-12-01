@@ -75,7 +75,15 @@ class GameUI:
             main_content += "[dim]Press 'S' to view Stats[/]"
         elif game_state['mode'] == 'DIALOGUE':
             history = game_state.get('history', [])
-            for speaker, text in history:
+            
+            # Truncate history to fit in panel (show last 6 items)
+            MAX_HISTORY = 6
+            display_history = history[-MAX_HISTORY:]
+            
+            if len(history) > MAX_HISTORY:
+                main_content += "[dim]... (previous messages hidden) ...[/]\n\n"
+            
+            for speaker, text in display_history:
                 if speaker == "You":
                     main_content += f"[bold cyan]You:[/] {text}\n\n"
                 else:
@@ -85,7 +93,7 @@ class GameUI:
             # Actually, core.py handles history.
             pass
             
-        self.console.print(Panel(main_content, title="Story", height=20))
+        self.console.print(Panel(main_content, title="Story"))
 
         # Actions (Footer)
         choices = game_state.get('choices', [])
