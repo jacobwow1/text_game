@@ -1,0 +1,80 @@
+{
+    "start_node": "root",
+    "nodes": [
+        {
+            "id": "root",
+            "text": "Greetings consul. It seems as though you have not yet found a solution to settling our accounts.",
+            "speaker": "Lucius",
+            "sequence": [
+                {
+                    "text": "I know that the other ministers have their own ideas, but being head of the treasury, I would like to think that I have the most simple and effective solution."
+                }
+            ],
+            "choices": [
+                {
+                    "text": "[RATIO] Very few things in government are simple and effective without having some drawbacks. Please explain.",
+                    "next_id": "reluctant",
+                    "requirements": {
+                        "stats": {
+                            "Ratio": 2
+                        }
+                    }
+                },
+                {
+                    "text": "You've got my attention. What do you suggest?",
+                    "next_id": "proposal"
+                }
+            ]
+        },
+        {
+            "id": "reluctant",
+            "text": "Well sir, that is true... Unfortunatly, this solution may not be as popular among the people. Though it will generate a lot of revenue.",
+            "speaker": "Lucius",
+            "choices": [
+                {
+                    "text": "Well, let's hear your proposal anyway.",
+                    "next_id": "proposal"
+                },
+                {
+                    "text": "[IMPERIUM] Then is it truly an effective solution? You know we can't afford to get on the people's bad side at a time like this.",
+                    "next_id": "defensive",
+                    "requirements": {
+                        "stats": {
+                            "Imperium": 2
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "id": "proposal",
+            "text": "I suggest we raise taxes, consul. Our treasury is too far depleted not to. Other solutions may raise some funds, but they will only be temporary solitions. The people will understand that it is necessary.",
+            "speaker": "Lucius",
+            "choices": [
+                {
+                    "text": "[PROVIDENTIA] I don't think this is a good idea. The previous administration was very corrupt, and I fear the people may think that we are stealing more of their money.",
+                    "next_id": "defensive",
+                    "requirements": {
+                        "stats": {
+                            "Providentia": 2
+                        }
+                    }
+                },
+                {
+                    "text": ""
+                }
+            ]
+        },
+        {
+            "id": "investigate",
+            "text": "'Very well. Here are the keys to the archives.' (You found the secret ledger!)",
+            "speaker": "Advisor Chen",
+            "choices": [
+                {
+                    "text": "I will return.",
+                    "action": "leave"
+                }
+            ]
+        }
+    ]
+}

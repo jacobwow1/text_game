@@ -28,8 +28,8 @@
             {
                 "file": "chapter_1/lucius_solution.json",
                 "requirements": {
-                    "stats": {
-                        "Pecunia": 25
+                    "flags": {
+                        "treasury_fixed": true
                     }
                 }
             },
